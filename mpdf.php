@@ -32453,62 +32453,62 @@ function ConvertSize($size=5,$maxsize=0,$fontsize=false,$usefontsize=true){
 	$size = trim(strtolower($size));
 
   if ( $size == 'thin' ) $size = 1*(25.4/$this->dpi); //1 pixel width for table borders
-  elseif ( stristr($size,'px') ) $size *= (25.4/$this->dpi); //pixels
-  elseif ( stristr($size,'cm') ) $size *= 10; //centimeters
-  elseif ( stristr($size,'mm') ) $size += 0; //millimeters
-  elseif ( stristr($size,'pt') ) $size *= 25.4/72; //72 pts/inch
+  elseif ( stristr($size,'px') ) $size = floatval($size) * (25.4 / $this->dpi); //pixels
+  elseif ( stristr($size,'cm') ) $size = floatval($size) * 10; //centimeters
+  elseif ( stristr($size,'mm') ) $size = floatval($size); //millimeters
+  elseif ( stristr($size,'pt') ) $size = floatval($size) * 25.4 / 72; //72 pts/inch
   elseif ( stristr($size,'rem') ) {	// mPDF 5.6.12
-  	$size += 0; //make "0.83rem" become simply "0.83" 
-	$size *= ($this->default_font_size / _MPDFK);
+  	$size = floatval($size); //make "0.83rem" become simply "0.83"
+	$size = floatval($size) * ($this->default_font_size / _MPDFK);
   }
   elseif ( stristr($size,'em') ) {
-  	$size += 0; //make "0.83em" become simply "0.83" 
-	if ($fontsize) { $size *= $fontsize; }
-	else { $size *= $maxsize; }
+  	$size = floatval($size); //make "0.83em" become simply "0.83"
+	if ($fontsize) { $size = floatval($size) * $fontsize; }
+	else { $size = floatval($size) * $maxsize; }
   }
   elseif ( stristr($size,'%') ) {
-  	$size += 0; //make "90%" become simply "90" 
-	if ($fontsize && $usefontsize) { $size *= $fontsize/100; }
-	else { $size *= $maxsize/100; }
+  	$size = floatval($size); //make "90%" become simply "90"
+	if ($fontsize && $usefontsize) { $size = floatval($size) * $fontsize / 100; }
+	else { $size = floatval($size) * $maxsize / 100; }
   }
-  elseif ( stristr($size,'in') ) $size *= 25.4; //inches 
-  elseif ( stristr($size,'pc') ) $size *= 38.1/9; //PostScript picas 
+  elseif ( stristr($size,'in') ) $size = floatval($size) * 25.4; //inches
+  elseif ( stristr($size,'pc') ) $size = floatval($size) * 38.1 / 9; //PostScript picas
   elseif ( stristr($size,'ex') ) {	// Approximates "ex" as half of font height
   	$size += 0; //make "3.5ex" become simply "3.5" 
-	if ($fontsize) { $size *= $fontsize/2; }
-	else { $size *= $maxsize/2; }
+	if ($fontsize) { $size = floatval($size) * $fontsize / 2; }
+	else { $size = floatval($size) * $maxsize / 2; }
   }
-  elseif ( $size == 'medium' ) $size = 3*(25.4/$this->dpi); //3 pixel width for table borders
-  elseif ( $size == 'thick' ) $size = 5*(25.4/$this->dpi); //5 pixel width for table borders
+  elseif ( $size == 'medium' ) $size = 3 * (25.4 / $this->dpi); //3 pixel width for table borders
+  elseif ( $size == 'thick' ) $size = 5 * (25.4 / $this->dpi); //5 pixel width for table borders
   elseif ($size == 'xx-small') {
-	if ($fontsize) { $size *= $fontsize*0.7; }
-	else { $size *= $maxsize*0.7; }
+	if ($fontsize) { $size = floatval($size) * $fontsize * 0.7; }
+	else { $size = floatval($size) * $maxsize * 0.7; }
   }
   elseif ($size == 'x-small') {
-	if ($fontsize) { $size *= $fontsize*0.77; }
-	else { $size *= $maxsize*0.77; }
+	if ($fontsize) { $size = floatval($size) * $fontsize * 0.77; }
+	else { $size = floatval($size) * $maxsize * 0.77; }
   }
   elseif ($size == 'small') {
-	if ($fontsize) { $size *= $fontsize*0.86; }
-	else { $size *= $maxsize*0.86; }
+	if ($fontsize) { $size = floatval($size) * $fontsize * 0.86; }
+	else { $size = floatval($size) * $maxsize * 0.86; }
   }
   elseif ($size == 'medium') {
-	if ($fontsize) { $size *= $fontsize; }
-	else { $size *= $maxsize; }
+	if ($fontsize) { $size = floatval($size) * $fontsize; }
+	else { $size = floatval($size) * $maxsize; }
   }
   elseif ($size == 'large') {
-	if ($fontsize) { $size *= $fontsize*1.2; }
-	else { $size *= $maxsize*1.2; }
+	if ($fontsize) { $size = floatval($size) * $fontsize * 1.2; }
+	else { $size = floatval($size) * $maxsize * 1.2; }
   }
   elseif ($size == 'x-large') {
-	if ($fontsize) { $size *= $fontsize*1.5; }
-	else { $size *= $maxsize*1.5; }
+	if ($fontsize) { $size = floatval($size) * $fontsize * 1.5; }
+	else { $size = floatval($size) * $maxsize*1.5; }
   }
   elseif ($size == 'xx-large') {
-	if ($fontsize) { $size *= $fontsize*2; }
-	else { $size *= $maxsize*2; }
+	if ($fontsize) { $size = floatval($size) * $fontsize * 2; }
+	else { $size = floatval($size) * $maxsize * 2; }
   }
-  else $size *= (25.4/$this->dpi); //nothing == px
+  else $size = floatval($size) * (25.4/$this->dpi); //nothing == px
   
   return $size;
 }
