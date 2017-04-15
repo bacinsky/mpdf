@@ -2,11 +2,6 @@
 
 class meter {
 
-
-function __construct() {
-
-}
-
 function makeSVG($tag, $type, $value, $max, $min, $optimum, $low, $high) {
   $svg = '';
   if ($tag == 'meter') {
